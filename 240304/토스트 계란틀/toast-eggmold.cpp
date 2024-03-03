@@ -36,6 +36,9 @@ int main() {
 
                     while(true)
                     {
+                        // store current idx
+                        neighbors[cnt_neighbor] = cur_y * n + cur_x;
+                        cnt_neighbor++;
                         visited[cur_y * n + cur_x] = 1;
 
                         // input queue
@@ -44,7 +47,7 @@ int main() {
                             if (cur_y + dy[d] > -1 && cur_y + dy[d] < n 
                             && cur_x + dx[d] > -1 && cur_x + dx[d] < n) // check boundary
                             {
-                                if (visited[(cur_y + dy[d]) * n + (cur_x + dx[d])] != 1)
+                                if (visited[(cur_y + dy[d]) * n + (cur_x + dx[d])] == 0)
                                 {
                                     int diff = abs(eggs[cur_y * n + cur_x] - eggs[(cur_y+dy[d]) * n + (cur_x+dx[d])]);
                                     if (diff >= L && diff <= R && diff != 0)
@@ -55,10 +58,6 @@ int main() {
                                 }                                                   
                             }
                         }
-
-                        // store current idx
-                        neighbors[cnt_neighbor] = cur_y * n + cur_x;
-                        cnt_neighbor++;
 
                         if (out_idx == inp_idx)  // queue is empty
                             break;
