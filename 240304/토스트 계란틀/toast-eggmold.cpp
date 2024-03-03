@@ -33,14 +33,14 @@ int main() {
                     int cnt_neighbor = 0;
                     int cur_x = x;
                     int cur_y = y;
+                    visited[cur_y * n + cur_x] = 1;
 
                     while(true)
                     {
                         // store current idx
                         neighbors[cnt_neighbor] = cur_y * n + cur_x;
                         cnt_neighbor++;
-                        visited[cur_y * n + cur_x] = 1;
-
+                        
                         // input queue
                         for (int d = 0; d < 4; d++)
                         {
@@ -52,12 +52,17 @@ int main() {
                                     int diff = abs(eggs[cur_y * n + cur_x] - eggs[(cur_y+dy[d]) * n + (cur_x+dx[d])]);
                                     if (diff >= L && diff <= R && diff != 0)
                                     {
+                                        visited[(cur_y+dy[d]) * n + (cur_x+dx[d])] = 1;
                                         q[inp_idx] = (cur_y + dy[d]) * n + (cur_x + dx[d]);
                                         inp_idx = (inp_idx + 1) % max_len;
                                     }                                
                                 }                                                   
                             }
                         }
+
+                        // for (int a = out_idx; a < inp_idx; a++)
+                        //     cout << q[a] << " ";
+                        // cout << endl;
 
                         if (out_idx == inp_idx)  // queue is empty
                             break;
